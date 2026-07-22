@@ -17,7 +17,9 @@ services:
 
   php:
     container_name: php
-    image: php:8.4-fpm
+    image: php-mysql:8.4-fpm
+    build:
+      context: .
     restart: unless-stopped
     volumes:
       - ./html:/var/www/html
