@@ -1,0 +1,35 @@
+---
+name: lemp
+
+services:
+  www:
+    container_name: www
+    image: nginx:1.28
+    ports:
+      - 80:80
+    restart: unless-stopped
+    volumes:
+      - ./html:/usr/share/nginx/html
+      - ./nginx-conf:/etc/nginx/conf.d
+    networks:
+      stagenet:
+        ipv4_address: 172.25.0.100
+
+  php:
+    container_name: php
+    image: php:8.4-fpm
+    restart: unless-stopped
+    volumes:
+      - ./html:/var/www/html
+    networks:
+      stagenet:
+        ipv4_address: 172.25.0.110
+
+networks:
+  stagenet:
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16
+          gateway: 172.25.0.254
+      options:
+        com.docker.network.bridge.name: stagenet0
