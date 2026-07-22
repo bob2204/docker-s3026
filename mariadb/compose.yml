@@ -1,0 +1,23 @@
+---
+name: mariadb
+
+services:
+  db:
+    image: mariadb:11.0
+    container_name: mariadb
+    volumes:
+      - datadb:/var/lib/mysql
+    networks:
+      stagenet:
+        ipv4_address: 172.25.0.120
+    environment:
+      - MARIADB_ROOT_PASSWORD=azerty
+      - MARIADB_DATABASE=stage
+
+volumes:
+  datadb:
+
+networks:
+  stagenet:
+    name: lemp_stagenet
+    external: true
