@@ -1,0 +1,28 @@
+---
+name: projet-v1
+
+services:
+  hello-1:
+    container_name: hello-n1
+    image: bob2606/hello-http:0.8.41
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+    networks:
+      hellonet:
+        ipv4_address: 172.30.0.100
+    volumes:
+      - data:/var/lib/hello-http
+      - ./config:/etc/hello
+
+networks:
+  hellonet:
+    ipam:
+      config:
+        - subnet: 172.30.0.0/16
+          gateway: 172.30.0.254
+      options:
+        com.docker.network.bridge.name: hellonet
+
+volumes:
+  data:
