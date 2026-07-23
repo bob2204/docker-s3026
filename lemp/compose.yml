@@ -26,6 +26,8 @@ services:
     networks:
       stagenet:
         ipv4_address: 172.25.0.110
+      phpdbnet:
+        ipv4_address: 172.26.0.110
 
 networks:
   stagenet:
@@ -35,3 +37,11 @@ networks:
           gateway: 172.25.0.254
       options:
         com.docker.network.bridge.name: stagenet0
+
+  phpdbnet:
+    ipam:
+      config:
+        - subnet: 172.26.0.0/16
+          gateway: 172.26.0.254
+      options:
+        com.docker.network.bridge.name: phpdbnet0

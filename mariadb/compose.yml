@@ -8,8 +8,8 @@ services:
     volumes:
       - datadb:/var/lib/mysql
     networks:
-      stagenet:
-        ipv4_address: 172.25.0.120
+      phpdbnet:
+        ipv4_address: 172.26.0.120
     environment:
       - MARIADB_ROOT_PASSWORD=azerty
       - MARIADB_DATABASE=stage
@@ -18,6 +18,6 @@ volumes:
   datadb:
 
 networks:
-  stagenet:
-    name: lemp_stagenet
+  phpdbnet:
+    name: lemp_phpdbnet
     external: true
