@@ -10,6 +10,7 @@ services:
     labels:
       traefik.enable: true
       traefik.http.services.who-1.loadbalancer.server.port: 8080
+      traefik.http.routers.who-1.rule: Host(`who-1.stage.local`)
 
   who-2:
     image: bob2606/hello-http:0.8.41
