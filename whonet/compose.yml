@@ -24,6 +24,8 @@ services:
       traefik.enable: true
       traefik.http.services.who-2.loadbalancer.server.port: 8080
       traefik.http.routers.who-2.rule: PathPrefix(`/who-2`)
+      traefik.http.middlewares.stripwho-2.stripprefix.prefixes: /who-2
+      traefik.http.routers.who-2.middlewares: stripwho-2
 
   who-3:
     image: bob2606/hello-http:0.8.41
