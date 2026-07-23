@@ -1,0 +1,9 @@
+services:
+  proxy:
+    networks:
+      whonet:
+
+networks:
+  whonet:
+    name: whonet_whonet
+    external: true 
