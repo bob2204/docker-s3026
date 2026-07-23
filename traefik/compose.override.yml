@@ -1,5 +1,7 @@
 services:
   proxy:
+    volumes:
+      - ./users.txt:/etc/traefik/users.txt
     networks:
       whonet:
 
