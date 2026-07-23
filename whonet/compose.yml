@@ -9,6 +9,7 @@ services:
         ipv4_address: 172.28.0.101
     labels:
       traefik.enable: true
+      traefik.http.services.who-1.loadbalancer.server.port: 8080
 
   who-2:
     image: bob2606/hello-http:0.8.41
@@ -20,6 +21,7 @@ services:
         ipv4_address: 172.28.0.102
     labels:
       traefik.enable: true
+      traefik.http.services.who-2.loadbalancer.server.port: 8080
 
   who-3:
     image: bob2606/hello-http:0.8.41
@@ -31,6 +33,7 @@ services:
         ipv4_address: 172.28.0.103
     labels:
       traefik.enable: true
+      traefik.http.services.who-3.loadbalancer.server.port: 8080
 
 networks:
   whonet:
