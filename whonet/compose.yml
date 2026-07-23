@@ -1,0 +1,40 @@
+services:
+  who-1:
+    image: bob2606/hello-http:0.8.41
+    container_name: who-1
+    hostname: who-1
+    restart: unless-stopped
+    ports:
+      - "8081:8080"
+    networks:
+      whonet:
+        ipv4_address: 172.28.0.101
+
+  who-2:
+    image: bob2606/hello-http:0.8.41
+    container_name: who-2
+    hostname: who-2
+    restart: unless-stopped
+    ports:
+      - "8082:8080"
+    networks:
+      whonet:
+        ipv4_address: 172.28.0.102
+
+  who-3:
+    image: bob2606/hello-http:0.8.41
+    container_name: who-3
+    hostname: who-3
+    restart: unless-stopped
+    ports:
+      - "8083:8080"
+    networks:
+      whonet:
+        ipv4_address: 172.28.0.103
+
+networks:
+  whonet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
