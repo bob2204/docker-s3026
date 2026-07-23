@@ -1,0 +1,26 @@
+---
+name: proxy
+services:
+  proxy:
+    image: traefik:v3.7.8
+    container_name: proxy
+    ports:
+      - 80:80
+      - 443:443
+      - 8080:8080
+    volumes:
+      - ./traefik.yml:/etc/traefik/traefik.yml
+      - /run/docker.sock:/run/docker.sock
+    restart: unless-stopped
+    networks:
+      proxynet:
+        ipv4_address: 172.27.0.10
+
+networks:
+  proxynet:
+    ipam:
+      config:
+        - subnet: 172.27.0.0/16
+          gateway: 172.27.0.254
+      options:
+        com.docker.network.bridge.name: proxynet0
