@@ -11,6 +11,9 @@ services:
       traefik.enable: true
       traefik.http.services.who-1.loadbalancer.server.port: 8080
       traefik.http.routers.who-1.rule: Host(`who-1.stage.local`)
+      traefik.http.middlewares.authwho-1.digestauth.usersfile: /etc/traefik/users.txt
+      traefik.http.middlewares.authwho-1.digestauth.realm: whonet
+      traefik.http.routers.who-1.middlewares: authwho-1
 
   who-2:
     image: bob2606/hello-http:0.8.41
