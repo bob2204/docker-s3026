@@ -9,6 +9,8 @@ services:
     networks:
       whonet:
         ipv4_address: 172.28.0.101
+    labels:
+      traefik.enable: true
 
   who-2:
     image: bob2606/hello-http:0.8.41
@@ -20,6 +22,8 @@ services:
     networks:
       whonet:
         ipv4_address: 172.28.0.102
+    labels:
+      traefik.enable: true
 
   who-3:
     image: bob2606/hello-http:0.8.41
@@ -31,6 +35,8 @@ services:
     networks:
       whonet:
         ipv4_address: 172.28.0.103
+    labels:
+      traefik.enable: true
 
 networks:
   whonet:
