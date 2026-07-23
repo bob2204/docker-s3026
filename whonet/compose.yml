@@ -38,6 +38,9 @@ services:
     labels:
       traefik.enable: true
       traefik.http.services.who-3.loadbalancer.server.port: 8080
+      traefik.http.routers.who-3.rule: (Host(`who-3.stage.local`) && PathPrefix(`/who-3`))
+      traefik.http.middlewares.stripwho-3.stripprefix.prefixes: /who-3
+      traefik.http.routers.who-3.middlewares: stripwho-3
 
 networks:
   whonet:
