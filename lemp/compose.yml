@@ -5,15 +5,26 @@ services:
   www:
     container_name: www
     image: nginx:1.28
-      # ports:
-      # - 80:80
     restart: unless-stopped
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost/healthy
+      interval: 10s
+      timeout: 1s
+      retries: 2
+      #start_period: 20s
     volumes:
       - ./html:/usr/share/nginx/html
       - ./nginx-conf:/etc/nginx/conf.d
     networks:
       stagenet:
         ipv4_address: 172.25.0.100
+    depends_on:
+      php:
+        condition: service_healthy
 
   php:
     container_name: php
@@ -21,6 +32,11 @@ services:
     build:
       context: .
     restart: unless-stopped
+    healthcheck:
+      test: SCRIPT_FILENAME=/var/www/html/ping.php REQUEST_METHOD=GET cgi-fcgi -bind -connect localhost:9000 | grep 'pong' || exit 1
+      interval: 20s
+      retries: 2
+      timeout: 1s
     volumes:
       - ./html:/var/www/html
     networks:
