@@ -1,0 +1,30 @@
+x-logging: &logging-defaults
+  logging:
+    options:
+      max-file: 10
+      max-size: 10m
+
+services:
+  who-1:
+    image: bob2606/hello-http:0.8.41
+    container_name: who-1
+    hostname: who-1
+    restart: unless-stopped
+    <<: *logging-defaults
+
+  who-2:
+    image: bob2606/hello-http:0.8.41
+    container_name: who-2
+    hostname: who-2
+    restart: unless-stopped
+    <<: *logging-defaults
+
+  who-3:
+    image: bob2606/hello-http:0.8.41
+    container_name: who-3
+    hostname: who-3
+    restart: unless-stopped
+    <<: *logging-defaults
+
+networks:
+  whonet:
