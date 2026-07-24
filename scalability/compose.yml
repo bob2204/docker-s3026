@@ -1,0 +1,31 @@
+#
+# Présentation de la scalability en mode Docker host
+#
+# Modification du nombre de réplicas
+#
+# docker compose scale who-1=10
+#
+# Test de la répartition
+#
+# docker exec -it busy sh
+# idx=0
+# while [ $idx -lt 18 ]
+# do
+#   wget -qO - who-1:8080
+#   id=$((id+1))
+# done | grep "Hostname :" | sort | uniq -c
+#
+
+services:
+  who-1:
+    image: bob2606/hello-http:0.8.41
+    restart: unless-stopped
+    deploy:
+      replicas: 3
+
+  busy:
+    image: busybox:1.28
+    command:
+      - sleep
+      - 3600
+    restart: unless-stopped
